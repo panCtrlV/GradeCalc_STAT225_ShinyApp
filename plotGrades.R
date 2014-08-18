@@ -11,16 +11,16 @@ chronLabel = c("Q1", "HW1", "Q2", "HW2", "Q3", "Exam1",
 worth_chron = c(quizWorth, hwWorth, examWorth, cpWorth)[match(chronLabel, names(c(quizWorth, hwWorth, examWorth, cpWorth)))]
 worthCumsum_chron = cumsum(worth_chron)
 
-## Sample grades
-quizGrade = c(10.5, 15, 11, 12, 13, 8, 9, 15); names(quizGrade) = paste("Q", 1:8, sep="")
-hwGrade = c(23, 24, 22, 21.5, 25); names(hwGrade) = paste("HW", 1:5, sep="")
-examGrade = c(80, 90.5, 110); names(examGrade) = c(paste("Exam", 1:2, sep=""), "Final")
-cpGrade = 15; names(cpGrade) = "CP"
-
-quizGrade = c(10.5); names(quizGrade) = paste("Q", 1, sep="")
-hwGrade = c(23); names(hwGrade) = paste("HW", 1, sep="")
-examGrade = c()
-cpGrade = c()
+# ## Sample grades
+# quizGrade = c(10.5, 15, 11, 12, 13, 8, 9, 15); names(quizGrade) = paste("Q", 1:8, sep="")
+# hwGrade = c(23, 24, 22, 21.5, 25); names(hwGrade) = paste("HW", 1:5, sep="")
+# examGrade = c(80, 90.5, 110); names(examGrade) = c(paste("Exam", 1:2, sep=""), "Final")
+# cpGrade = 15; names(cpGrade) = "CP"
+# # Sample grades with missing value
+# quizGrade = c(10.5); names(quizGrade) = paste("Q", 1, sep="")
+# hwGrade = c(23); names(hwGrade) = paste("HW", 1, sep="")
+# examGrade = c()
+# cpGrade = c()
 
 ## Plot function
 # Un-adjusted
@@ -46,7 +46,7 @@ PlotGrades = function(quizGrade, hwGrade, examGrade, cpGrade){
     
     ## Plot grades (individual and cumulative)
     par(mex=1.5, # Axes margins will be twice the normal size (so that y label and ticks won't overlap)
-        mar=c(5.1, 4.1, 1, 9)) # Add extra space to right of plot area (to leave space for legend)
+        mar=c(7.1, 4.1, 1, 4.1)) # Add extra space to right of plot area (to leave space for legend)
     
     if(length(gradePct_chron)==0){
         yLowLimit = 60
@@ -81,9 +81,10 @@ PlotGrades = function(quizGrade, hwGrade, examGrade, cpGrade){
     # Add the line of cumulative percentages
     lines(gradeCumsumPct_chron, type="b", lwd=2, pch=20, col="blue")
     # Add legend
-    legend("topright", inset=c(-0.4,0), legend=c("Individual","Cumulative"), 
+    legend("bottom", inset=c(0, -0.55), legend=c("Individual","Cumulative"), 
            pch=c(18,20), lty=c("dotted", "solid"), col=c("black", "blue"), 
-           cex=0.8,
+           horiz=T,
+           cex=1,
            title="Grade type", 
            xpd=T) # enable plot the legend outside the main figure
 }
@@ -120,7 +121,7 @@ PlotGrades_adj = function(quizGrade, hwGrade, examGrade, cpGrade){
         
         ## Plot grades (individual and cumulative)
         par(mex=1.5, # Axes margins will be twice the normal size (so that y label and ticks won't overlap)
-            mar=c(5.1, 4.1, 1, 9)) # Add extra space to right of plot area (to leave space for legend)
+            mar=c(7.1, 4.1, 1, 4.1)) # Add extra space to right of plot area (to leave space for legend)
         
         # x, y limit for plots
         yLowLimit = min(min(gradeCumsumPct_chron, gradePct_chron)*0.8, 60)
@@ -153,9 +154,10 @@ PlotGrades_adj = function(quizGrade, hwGrade, examGrade, cpGrade){
         # Add the line of cumulative percentages
         lines(gradeCumsumPct_chron, type="b", lwd=2, pch=20, col="blue")
         # Add legend
-        legend("topright", inset=c(-0.4,0), legend=c("Individual","Cumulative"), 
-               pch=c(18,20), lty=c("dotted", "solid"), col=c("black", "blue"), 
-               cex=0.8,
+        legend("bottom", inset=c(0, -0.55), legend=c("Individual","Cumulative"), 
+               pch=c(18,20), lty=c("dotted", "solid"), col=c("black", "blue"),
+               horiz=T,
+               cex=1,
                title="Grade type", 
                xpd=T) # enable plot the legend outside the main figure
     }
