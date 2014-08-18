@@ -2,16 +2,25 @@ library(shiny)
 source("plotGrades.R")
 
 shinyServer(
-    function(input, output, session){        
-#         output$quizGrades = renderText({
-#             quizGrades = c(input$quiz1, input$quiz2, input$quiz3, input$quiz4, input$quiz5, input$quiz6, input$quiz7, input$quiz8)
-#             names(quizGrades) = paste("Q", 1:8, sep="")
-#             hwGrades = c(input$hw1, input$hw2, input$hw3, input$hw4, input$hw5)
-#             names(hwGrades) = paste("HW", 1:5, sep="")
-#             examGrades = c(input$exam1, input$exam2, input$final)
-#             names(examGrades) = c(paste("Exam", 1:2, sep=""), "Final")
-#             quizGrades
-#         })
+    function(input, output, session){    
+        # Capture user inputs, which will be used repeated later
+        # Note: the list is retrieved by calling "userGrades()", i.e. a function-like call.
+        userGrades = reactive({
+            quizGrades = c(input$quiz1, input$quiz2, input$quiz3, input$quiz4, input$quiz5, input$quiz6, input$quiz7, input$quiz8)
+            names(quizGrades) = paste("Q", 1:8, sep="")
+            quizGrades = quizGrades[!is.na(quizGrades)]
+            hwGrades = c(input$hw1, input$hw2, input$hw3, input$hw4, input$hw5)
+            names(hwGrades) = paste("HW", 1:5, sep="")
+            hwGrades = hwGrades[!is.na(hwGrades)]
+            examGrades = c(input$exam1, input$exam2, input$final)
+            names(examGrades) = c(paste("Exam", 1:2, sep=""), "Final")
+            examGrades = examGrades[!is.na(examGrades)]
+            cpGrade = input$cp
+            names(cpGrade) = "CP"
+            cpGrade = cpGrade[!is.na(cpGrade)]
+            
+            list(quizGrades, hwGrades, examGrades, cpGrade)
+        })
         
         # Save user's input grades
         logfile <- paste('./userlogs/', 
@@ -20,46 +29,20 @@ shinyServer(
                          '.csv',
                          sep='')
         observe({
-            quizGrades = c(input$quiz1, input$quiz2, input$quiz3, input$quiz4, input$quiz5, input$quiz6, input$quiz7, input$quiz8)
-            names(quizGrades) = paste("Q", 1:8, sep="")
-            #quizGrades = quizGrades[!is.na(quizGrades)]
-            hwGrades = c(input$hw1, input$hw2, input$hw3, input$hw4, input$hw5)
-            names(hwGrades) = paste("HW", 1:5, sep="")
-            #hwGrades = hwGrades[!is.na(hwGrades)]
-            examGrades = c(input$exam1, input$exam2, input$final)
-            names(examGrades) = c(paste("Exam", 1:2, sep=""), "Final")
-            #examGrades = examGrades[!is.na(examGrades)]
-            cpGrade = input$cp
-            names(cpGrade) = "CP"
-            #cpGrade = cpGrade[!is.na(cpGrade)]
-            
             if(input$submitButton == 0)
                 return()
             isolate({
-                value <- c(quizGrades, hwGrades, examGrades, cpGrade)
+                value = unlist(userGrades())
                 write.csv(t(value), logfile, row.names=F)
-            }, autoDesotry=F)
+            })
         })#END observe
         
         # Grade plot
         output$gradePlot = renderPlot({
             input$submitButton
-            
+         
             isolate({
-                quizGrades = c(input$quiz1, input$quiz2, input$quiz3, input$quiz4, input$quiz5, input$quiz6, input$quiz7, input$quiz8)
-                names(quizGrades) = paste("Q", 1:8, sep="")
-                quizGrades = quizGrades[!is.na(quizGrades)]
-                hwGrades = c(input$hw1, input$hw2, input$hw3, input$hw4, input$hw5)
-                names(hwGrades) = paste("HW", 1:5, sep="")
-                hwGrades = hwGrades[!is.na(hwGrades)]
-                examGrades = c(input$exam1, input$exam2, input$final)
-                names(examGrades) = c(paste("Exam", 1:2, sep=""), "Final")
-                examGrades = examGrades[!is.na(examGrades)]
-                cpGrade = input$cp
-                names(cpGrade) = "CP"
-                cpGrade = cpGrade[!is.na(cpGrade)]
-                
-                PlotGrades(quizGrades, hwGrades, examGrades, cpGrade)
+                PlotGrades(userGrades()[[1]], userGrades()[[2]], userGrades()[[3]], userGrades()[[4]])
             }) 
         })
         # Adjusted grade plot
@@ -67,20 +50,7 @@ shinyServer(
             input$submitButton
             
             isolate({
-                quizGrades = c(input$quiz1, input$quiz2, input$quiz3, input$quiz4, input$quiz5, input$quiz6, input$quiz7, input$quiz8)
-                names(quizGrades) = paste("Q", 1:8, sep="")
-                quizGrades = quizGrades[!is.na(quizGrades)]
-                hwGrades = c(input$hw1, input$hw2, input$hw3, input$hw4, input$hw5)
-                names(hwGrades) = paste("HW", 1:5, sep="")
-                hwGrades = hwGrades[!is.na(hwGrades)]
-                examGrades = c(input$exam1, input$exam2, input$final)
-                names(examGrades) = c(paste("Exam", 1:2, sep=""), "Final")
-                examGrades = examGrades[!is.na(examGrades)]
-                cpGrade = input$cp
-                names(cpGrade) = "CP"
-                cpGrade = cpGrade[!is.na(cpGrade)]
-                
-                PlotGrades_adj(quizGrades, hwGrades, examGrades, cpGrade)
+                PlotGrades_adj(userGrades()[[1]], userGrades()[[2]], userGrades()[[3]], userGrades()[[4]])
             }) 
         })
         
@@ -89,18 +59,10 @@ shinyServer(
             input$submitButton
             
             isolate({
-                quizGrades = c(input$quiz1, input$quiz2, input$quiz3, input$quiz4, input$quiz5, input$quiz6, input$quiz7, input$quiz8)
-                names(quizGrades) = paste("Q", 1:8, sep="")
-                quizGrades = quizGrades[!is.na(quizGrades)]
-                hwGrades = c(input$hw1, input$hw2, input$hw3, input$hw4, input$hw5)
-                names(hwGrades) = paste("HW", 1:5, sep="")
-                hwGrades = hwGrades[!is.na(hwGrades)]
-                examGrades = c(input$exam1, input$exam2, input$final)
-                names(examGrades) = c(paste("Exam", 1:2, sep=""), "Final")
-                examGrades = examGrades[!is.na(examGrades)]
-                cpGrade = input$cp
-                names(cpGrade) = "CP"
-                cpGrade = cpGrade[!is.na(cpGrade)]
+                quizGrades = userGrades()[[1]]
+                hwGrades = userGrades()[[2]]
+                examGrades = userGrades()[[3]]
+                cpGrade = userGrades()[[4]]
                 
                 orderInd = match(chronLabel, names(c(quizGrades, hwGrades, examGrades, cpGrade)))
                 orderInd = orderInd[!is.na(orderInd)]
@@ -146,6 +108,7 @@ shinyServer(
             }) #END isolate   
         })
         
+        # Clear inputs
         observe({
             input$clearButton
             
@@ -169,30 +132,6 @@ shinyServer(
                 }
             })
         })
-        
-        
-#         output$totalGradeSoFar = renderText({
-#             quizGrades = c(input$quiz1, input$quiz2, input$quiz3, input$quiz4, input$quiz5, input$quiz6, input$quiz7, input$quiz8)
-#             names(quizGrades) = paste("Q", 1:8, sep="")
-#             quizGrades = quizGrades[!is.na(quizGrades)]
-#             hwGrades = c(input$hw1, input$hw2, input$hw3, input$hw4, input$hw5)
-#             names(hwGrades) = paste("HW", 1:5, sep="")
-#             hwGrades = hwGrades[!is.na(hwGrades)]
-#             examGrades = c(input$exam1, input$exam2, input$final)
-#             names(examGrades) = c(paste("Exam", 1:2, sep=""), "Final")
-#             examGrades = examGrades[!is.na(examGrades)]
-#             cpGrade = input$cp
-#             names(cpGrade) = "CP"
-#             cpGrade = cpGrade[!is.na(cpGrade)]
-#             
-#             #quizGrades
-#             orderInd = match(chronLabel, names(c(quizGrades, hwGrades, examGrades, cpGrade)))
-#             orderInd = orderInd[!is.na(orderInd)]
-#             #orderInd
-#             grade_chron = c(quizGrades, hwGrades, examGrades, cpGrade)[orderInd]
-#             #grade_chron
-#             sum(grade_chron)
-#         })
         
     }    
 )
