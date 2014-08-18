@@ -21,6 +21,7 @@ shinyUI(
                         numericInput("quiz7", "Quiz 7:", 13.5),
                         numericInput("quiz8", "Quiz 8:", 15)
                     ),
+                    column(1),
                     column(3,
                         h4("HWs", align="center"),
                         numericInput("hw1", "HW 1:", 21.5),
@@ -29,6 +30,7 @@ shinyUI(
                         numericInput("hw4", "HW 4:", 20),
                         numericInput("hw5", "HW 5:", 25)
                     ),
+                    column(1),
                     column(3,
                         h4("Exams", align="center"),
                         numericInput("exam1", "Exam 1:", 83.5),
@@ -57,7 +59,8 @@ shinyUI(
                 h4("Percentages after Adjustment (Retrospectively)", align="center"),
                 plotOutput("gradePlot_adj"),
                 h4("Numerical facts"),
-                textOutput("totalEarned_text")
+                textOutput("totalEarned_text"),
+                HTML(br())
             )       
         )
     )    
