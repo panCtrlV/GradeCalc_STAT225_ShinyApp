@@ -45,6 +45,7 @@ shinyUI(
                 #submitButton("Submit")
                 fluidRow(
                     column(2, actionButton("submitButton", "Submit")),
+                    column(2),
                     column(2, actionButton("clearButton", "Clear"))
                 )
                 
@@ -52,15 +53,14 @@ shinyUI(
             # Show the results
             mainPanel(
                 h3("Your progress report"),
-                p("The following plots shows your progress for each assignment (dashed line) and overall performance (solid line) before and after dropping the lowest quiz grade."),
-#                 textOutput("quizGrades"),
+                textOutput("totalEarned_text"),
+                HTML("<br/>"),
+                p("The following plots show your progress for each assignment (dashed line) and overall performance (solid line), before and after dropping the lowest quiz grade."),
+                HTML("<br/>"),
                 h4("Percentages before Adjustment", align="center"),
                 plotOutput("gradePlot"),
                 h4("Percentages after Adjustment (Retrospectively)", align="center"),
-                plotOutput("gradePlot_adj"),
-                h4("Numerical facts"),
-                textOutput("totalEarned_text"),
-                HTML(br())
+                plotOutput("gradePlot_adj")
             )       
         )
     )    

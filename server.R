@@ -91,7 +91,7 @@ shinyServer(
                 # Assign letter grade
                 letterGradeSoFar = AssignLetterGrade(totalGradeSoFarPct)
                 
-                str1 = paste("Before adjustment, total points earned (out of ", totalWorthSoFar, "): ", totalGradeSoFar, 
+                str1 = paste("Before adjustment, total points earned (out of ", totalWorthSoFar, ") are: ", totalGradeSoFar, 
                              " (", format(totalGradeSoFarPct, digits=4), "%).", sep="")
                 str2 = paste("This corresponds to a letter grade: ", letterGradeSoFar, ".", sep="")
                 
@@ -109,7 +109,7 @@ shinyServer(
                     letterGradeSoFar_adj = AssignLetterGrade(totalGradeSoFarPct_adj)
                 }
                 
-                str3 = paste("After adjustment, total points earned (out of ", totalWorthSoFar_adj, "): ", totalGradeSoFar_adj, 
+                str3 = paste("After adjustment, total points earned (out of ", totalWorthSoFar_adj, ") are: ", totalGradeSoFar_adj, 
                              " (", format(totalGradeSoFarPct_adj, digits=4), "%).", sep="")
                 str4 = paste("This corresponds to a letter grade: ", letterGradeSoFar_adj, ".", sep="")
                 

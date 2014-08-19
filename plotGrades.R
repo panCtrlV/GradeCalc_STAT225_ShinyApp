@@ -63,9 +63,9 @@ PlotGrades = function(quizGrade, hwGrade, examGrade, cpGrade){
     axis(2, at=c(60, 70, 80, 90, 100), labels=c("60 (D)", "70 (C)", "80 (B)", "90 (A)", "100"), las=2)
     box()
     
-    polygon(c(1, xLen+1, xLen+1, 1), c(yLowLimit, yLowLimit, 90, 90), col="red")
-    polygon(c(1, xLen+1, xLen+1, 1), c(70, 70, 90, 90), col="lightyellow")
-    polygon(c(1, xLen+1, xLen+1, 1), c(90, 90, 100, 100), col="lightgreen")
+    polygon(c(1, xLen+0.5, xLen+0.5, 1), c(yLowLimit, yLowLimit, 90, 90), col="red")
+    polygon(c(1, xLen+0.5, xLen+0.5, 1), c(70, 70, 90, 90), col="lightyellow")
+    polygon(c(1, xLen+0.5, xLen+0.5, 1), c(90, 90, 100, 100), col="lightgreen")
     
     # Add reference lines
     # for(yVal in c(60, 70, 80, 90)){
@@ -136,9 +136,9 @@ PlotGrades_adj = function(quizGrade, hwGrade, examGrade, cpGrade){
         axis(2, at=c(60, 70, 80, 90, 100), labels=c("60 (D)", "70 (C)", "80 (B)", "90 (A)", "100"), las=2)
         box()
         
-        polygon(c(1, xLen+1, xLen+1, 1), c(yLowLimit, yLowLimit, 90, 90), col="red")
-        polygon(c(1, xLen+1, xLen+1, 1), c(70, 70, 90, 90), col="lightyellow")
-        polygon(c(1, xLen+1, xLen+1, 1), c(90, 90, 100, 100), col="lightgreen")
+        polygon(c(1, xLen+0.5, xLen+0.5, 1), c(yLowLimit, yLowLimit, 90, 90), col="red")
+        polygon(c(1, xLen+0.5, xLen+0.5, 1), c(70, 70, 90, 90), col="lightyellow")
+        polygon(c(1, xLen+0.5, xLen+0.5, 1), c(90, 90, 100, 100), col="lightgreen")
         
         # Add reference lines
         # for(yVal in c(60, 70, 80, 90)){
