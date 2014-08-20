@@ -12,34 +12,34 @@ shinyUI(
                 fluidRow(
                     column(3, 
                         h4("Quizzes", align="center"),   
-                        numericInput("quiz1", "Quiz 1:", value = 11),
-                        numericInput("quiz2", "Quiz 2:", 12.5),
-                        numericInput("quiz3", "Quiz 3:", 13),
-                        numericInput("quiz4", "Quiz 4:", 9),
-                        numericInput("quiz5", "Quiz 5:", 7.5),
-                        numericInput("quiz6", "Quiz 6:", 14),
-                        numericInput("quiz7", "Quiz 7:", 13.5),
-                        numericInput("quiz8", "Quiz 8:", 15)
+                        numericInput("quiz1", "Quiz 1:", value = 11, min=0, max=15, step=0.5),
+                        numericInput("quiz2", "Quiz 2:", 12.5, min=0, max=15, step=0.5),
+                        numericInput("quiz3", "Quiz 3:", 13, min=0, max=15, step=0.5),
+                        numericInput("quiz4", "Quiz 4:", 9, min=0, max=15, step=0.5),
+                        numericInput("quiz5", "Quiz 5:", 7.5, min=0, max=15, step=0.5),
+                        numericInput("quiz6", "Quiz 6:", 14, min=0, max=15, step=0.5),
+                        numericInput("quiz7", "Quiz 7:", 13.5, min=0, max=15, step=0.5),
+                        numericInput("quiz8", "Quiz 8:", 15, min=0, max=15, step=0.5)
                     ),
                     column(1),
                     column(3,
                         h4("HWs", align="center"),
-                        numericInput("hw1", "HW 1:", 21.5),
-                        numericInput("hw2", "HW 2:", 22),
-                        numericInput("hw3", "HW 3:", 23.5),
-                        numericInput("hw4", "HW 4:", 20),
-                        numericInput("hw5", "HW 5:", 25)
+                        numericInput("hw1", "HW 1:", 21.5, min=0, max=25, step=0.5),
+                        numericInput("hw2", "HW 2:", 22, min=0, max=25, step=0.5),
+                        numericInput("hw3", "HW 3:", 23.5, min=0, max=25, step=0.5),
+                        numericInput("hw4", "HW 4:", 20, min=0, max=25, step=0.5),
+                        numericInput("hw5", "HW 5:", 25, min=0, max=25, step=0.5)
                     ),
                     column(1),
                     column(3,
                         h4("Exams", align="center"),
-                        numericInput("exam1", "Exam 1:", 83.5),
-                        numericInput("exam2", "Exam 2:", 91),
-                        numericInput("final", "Final:", 112.5),
+                        numericInput("exam1", "Exam 1:", 83.5, min=0, max=100, step=0.5),
+                        numericInput("exam2", "Exam 2:", 91, min=0, max=100, step=0.5),
+                        numericInput("final", "Final:", 112.5, min=0, max=120, step=0.5),
                         br(),
                         br(),
                         h4("Participation", align="center"),
-                        numericInput("cp", "Participation:", 15)
+                        numericInput("cp", "Participation:", 15, min=0, max=15, step=0.5)
                     )
                 ), # END fluidRow
                 #submitButton("Submit")
