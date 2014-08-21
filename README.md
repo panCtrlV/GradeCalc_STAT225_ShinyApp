@@ -14,6 +14,7 @@ Current functionality:
   
 TODO:
 - Validate user's inputs. Quiz >=0 and <=15, homeword >=0 and <=25, exam >=0 and <=100, and final >=0 and <=120.
-- Add the overall performance for individual and cumulative grades so that a student can benchmark his/her performance.
-  Need a good way to incorporate that into the existing plots.
+- Add the overall performance for individual and cumulative grades so that a student can benchmark his/her performance. 
+  This could be done by setting up a database for students grades.
+  Also, I need a good way to incorporate that into the existing plots.
 - Assign each user a unique number, so that one can use it to retrieve his/her previous inputs.
