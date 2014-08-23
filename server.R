@@ -1,5 +1,10 @@
 library(shiny)
-source("plotGrades.R")
+source("helper.R")
+
+# validQuizGrade = function(quizGrade){
+#     if(quizGrade<0 || quizGrade>15)
+#         "Invalid quiz grade !"
+# }
 
 shinyServer(
     function(input, output, session){    
@@ -11,6 +16,10 @@ shinyServer(
             isolate({
 #                 validate(
 #                     need(input$quiz1 <= 15, "Quiz 1 grade should be a number between 0 and 15 !")
+#                 )
+                
+#                 validate(
+#                     validQuizGrade(input$quiz1)    
 #                 )
                 
                 quizGrades = c(input$quiz1, input$quiz2, input$quiz3, input$quiz4, input$quiz5, input$quiz6, input$quiz7, input$quiz8)
